@@ -1,14 +1,12 @@
-from subprocess import run as srun
-from os import path as ospath
-from sys import executable
-from os import execl as osexecl
+import os
 import sys
+from subprocess import run as srun
 
 UPSTREAM_REPO = 'https://github.com/harsha7668/metabor'
 UPSTREAM_BRANCH = 'SH24BOTS-GD-REVERSION-GRP'
 
-if UPSTREAM_REPO is not None:
-    if ospath.exists('.git'):
+if UPSTREAM_REPO:
+    if os.path.exists('.git'):
         srun(["rm", "-rf", ".git"])
 
     update = srun(f"""
@@ -24,9 +22,9 @@ if UPSTREAM_REPO is not None:
 
     if update.returncode == 0:
         print("Update successful. Restarting bot...")
-        bot_path = ospath.join(ospath.dirname(__file__), "bot.py")  # Ensure correct path
-        if ospath.exists(bot_path):
-            osexecl(executable, executable, bot_path)
+        bot_path = os.path.join(os.getcwd(), "bot.py")  # Ensure correct path
+        if os.path.exists(bot_path):
+            os.execl(sys.executable, sys.executable, bot_path)
         else:
             print(f"Error: {bot_path} not found. Cannot restart.")
             sys.exit(1)
