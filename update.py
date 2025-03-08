@@ -3,6 +3,7 @@ from subprocess import run as srun
 from os import path as ospath
 from sys import executable
 from os import execl as osexecl
+import sys
 
 UPSTREAM_REPO = 'https://github.com/harsha7668/metabor'
 UPSTREAM_BRANCH = 'SH24BOTS-GD-REVERSION-GRP'
@@ -22,7 +23,7 @@ if UPSTREAM_REPO is not None:
 
 
     if update.returncode == 0:
-        osexecl(executable, executable, "bot.py")
+        os.execl(sys.executable, sys.executable, "bot.py")
     else:
         print('Something went wrong while updating, check UPSTREAM_REPO if valid or not!')
 
