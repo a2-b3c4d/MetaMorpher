@@ -23,7 +23,7 @@ if UPSTREAM_REPO is not None:
 
 
     if update.returncode == 0:
-        os.execl(sys.executable, sys.executable, "bot.py")
+        osexecl(sys.executable, sys.executable, "bot.py")
     else:
         print('Something went wrong while updating, check UPSTREAM_REPO if valid or not!')
 
